@@ -96,7 +96,7 @@
     var w = canvas.clientWidth, h = canvas.clientHeight;
     renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
     var narrow = w / h < 1;
-    var sx = narrow ? 0 : 2.15, sy = narrow ? -0.9 : -0.2;
+    var sx = narrow ? 0 : 2.15, sy = narrow ? -2.1 : -0.2;
     world.position.set(sx, sy, 0); shell.position.copy(world.position);
     camera.position.z = narrow ? 13 : 11;
   }

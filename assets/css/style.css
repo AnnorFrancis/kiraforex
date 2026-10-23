@@ -844,7 +844,7 @@ html.pose .desk-btn { display: none; }
   .steps-up { min-height: 300px; }
   .m-hero { min-height: 0; }
   .m-hero__pic { grid-column: 1 / -1; min-height: 70svh; }
-  .m-hero__pic img[src*="white-suit"] { object-position: 80% 22% !important; }
+  .m-hero__pic img[src*="white-suit"] { object-position: 16% 24% !important; }
   .globe-sec__copy .side { grid-column: 1 / -1 !important; }
   .m-hero__copy { grid-column: 1 / -1; margin-top: 36px; }
   .fit { grid-template-columns: 1fr; }
