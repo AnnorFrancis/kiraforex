@@ -844,6 +844,8 @@ html.pose .desk-btn { display: none; }
   .steps-up { min-height: 300px; }
   .m-hero { min-height: 0; }
   .m-hero__pic { grid-column: 1 / -1; min-height: 70svh; }
+  .m-hero__pic img[src*="white-suit"] { object-position: 80% 22% !important; }
+  .globe-sec__copy .side { grid-column: 1 / -1 !important; }
   .m-hero__copy { grid-column: 1 / -1; margin-top: 36px; }
   .fit { grid-template-columns: 1fr; }
   .camp { row-gap: 12px; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; }
@@ -853,7 +855,7 @@ html.pose .desk-btn { display: none; }
   .course__buy .plan__price { font-size: var(--step-lead); }
   .camp { background: none; padding: 28px 0; box-shadow: inset 0 -1px 0 rgba(10,35,26,.12); }
   .co-main, .co-sum { grid-column: 1 / -1 !important; }
-  .co-sum { position: relative; top: 0; margin-top: 40px; order: -1; }
+  .co-sum { position: relative; top: 0; margin-top: 48px; }
   .at-live, .at-setups, .at-course, .at-journal { grid-column: 1 / -1; }
   .legal__nav { display: none; }
   .legal > .wrap > div { grid-column: 1 / -1 !important; }

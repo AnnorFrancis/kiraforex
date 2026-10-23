@@ -4,7 +4,7 @@
 (function () {
   'use strict';
   var KF = window.KF;
-  var KEY = 'kf.db.v2';
+  var KEY = 'kf.db.v3';
   function rng(seed) { return function () { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }; }
   function pick(r, a) { return a[Math.floor(r() * a.length)]; }
   function iso(d) { return d.toISOString().slice(0, 10); }
@@ -37,8 +37,9 @@
       members.push({ id: 'M' + (1000 + i), name: name, country: country(r), plan: plan, joined: iso(joined), active: active, course: r() < 0.34 ? pick(r, KF.courses).id : null });
     }
     var cat = KF.catalog(), ids = Object.keys(cat);
-    for (var j = 0; j < 520; j++) {
-      var d = addDays(today, -Math.floor(Math.pow(r(), 1.7) * 360));
+    var LAM = 0.0015, SPAN = 1 - Math.exp(-LAM * 360);
+    for (var j = 0; j < 760; j++) {
+      var d = addDays(today, -Math.floor(-Math.log(1 - r() * SPAN) / LAM));
       var m = members[Math.floor(r() * members.length)];
       var it = r() < 0.66 ? 'room-' + m.plan : (r() < 0.7 ? 'course-' + pick(r, KF.courses).id : 'camp-' + pick(r, KF.tour).id + (r() < 0.25 ? '-vip' : ''));
       orders.push({ ref: 'KF-' + (240000 + j * 7 + Math.floor(r() * 7)), date: iso(d), item: it, name: m.name, country: m.country, usd: cat[it].usd, method: pick(r, ['Mobile Money', 'Mobile Money', 'Card', 'Card', 'Bank transfer']), status: 'Paid' });
