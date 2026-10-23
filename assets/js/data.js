@@ -53,7 +53,7 @@
 
   /* The four ways to trade with Kira. Prices are SAMPLE figures for the pitch: confirm with the client. */
   KF.offers = [
-    { id: 'room', name: 'Trading Room', word: 'Access', href: 'trading-room.html', from: 99, unit: 'a month', img: 'kira-desk-pink',
+    { id: 'room', name: 'Trading Room', word: 'Access', href: 'trading-room.html', from: 99, unit: 'a month', img: 'kira-studio-white',
       line: 'My daily setups on gold and the majors, the way I take them: entry, stop and three targets.',
       items: ['Daily gold and FX setups', 'Entry, stop and three targets', 'Two live sessions a week', 'The Sunday forecast', 'Synthetics on weekends', 'The members’ community'] },
     { id: 'academy', name: 'Academy', word: 'Knowledge', href: 'academy.html', from: 249, unit: '', img: 'bootcamp-uae',
@@ -62,7 +62,7 @@
     { id: 'mentorship', name: 'Mentorship', word: 'Proximity', href: 'mentorship.html', from: 4800, unit: 'by application', img: 'kira-portrait-blazer',
       line: 'Twelve weeks with me, one to one. Six seats a quarter, by application only.',
       items: ['Twelve weeks, one to one', 'Your plan, written together', 'Weekly chart reviews', 'Journal and mindset check-ins', 'A direct line to Kira', 'Six seats a quarter'] },
-    { id: 'bootcamps', name: 'Bootcamps', word: 'Immersion', href: 'bootcamps.html', from: 650, unit: '', img: 'stage-dubai-summit',
+    { id: 'bootcamps', name: 'Bootcamps', word: 'Immersion', href: 'bootcamps.html', from: 650, unit: '', img: 'kira-lobby-red',
       line: 'Two days in the room with me: live charts on the big screen, then dinner.',
       items: ['Two days in the room', 'Live trading on the big screen', 'Seven cities, 2026–27', 'Dinner with Kira (VIP)', 'Workbook and replays', 'Forty seats per city'] }
   ];
@@ -76,13 +76,13 @@
 
   /* Academy programmes (sample prices and schedules). */
   KF.courses = [
-    { id: 'foundations', name: 'Foundations', usd: 249, length: 'Self-paced, about 6 weeks', level: 'Beginner', img: 'kira-desk-red',
+    { id: 'foundations', name: 'Foundations', usd: 249, length: 'Self-paced, about 6 weeks', level: 'Beginner', img: 'kira-studio-white',
       line: 'Everything before your first live trade: how the market moves, how to read it, and how not to blow an account.',
       modules: ['How forex, gold and indices really move', 'Candlesticks and the confirmations that matter', 'Market structure and the break of structure', 'TradingView from zero', 'Risk: lot size, stop loss and the 1% rule', 'Your first demo month, with a journal'] },
-    { id: 'method', name: 'The Kira Method', usd: 1250, length: '8 weeks, live, 2 evenings a week', level: 'Intermediate', img: 'kira-desk-stripe',
+    { id: 'method', name: 'The Kira Method', usd: 1250, length: '8 weeks, live, 2 evenings a week', level: 'Intermediate', img: 'bootcamp-uae',
       line: 'My system, taught live: top-down analysis, break and retest, the 4-hour plan, and the discipline to repeat it.',
       modules: ['Top-down analysis, weekly to 15-minute', 'Break and retest, beginner to advanced', 'The 4-hour trading plan', 'Entries, stops and three targets', 'Revenge trading, overtrading and boredom', 'A written plan, reviewed by Kira'] },
-    { id: 'gold', name: 'Gold Mastery', usd: 790, length: '4 weeks, live', level: 'Intermediate', img: 'kira-white-suit',
+    { id: 'gold', name: 'Gold Mastery', usd: 790, length: '4 weeks, live', level: 'Intermediate', img: 'kira-suit-white',
       line: 'XAUUSD is my market. How it trends, where it traps people, and how I size it.',
       modules: ['What moves gold: the dollar, yields, the news', 'Sessions: London, New York and the gold open', 'Riding the trend without chasing it', 'Sizing gold when it moves $50 a day', 'NFP and CPI days, planned in advance', 'Live gold sessions with Kira'] },
     { id: 'synthetics', name: 'Synthetics Weekend', usd: 199, length: '2 days, online', level: 'All levels', img: 'kira-car-1',

@@ -144,13 +144,13 @@
     timer = setInterval(function () { if (!held && !UI.reduced) setCity(KF.tour[(i + 1) % KF.tour.length].id); }, 4200);
     $$('.camp', list).forEach(function (el) { el.addEventListener('pointerenter', function () { setCity(el.getAttribute('data-city')); }); });
     if (location.hash) { var id = location.hash.slice(1); if (KF.tour.some(function (t) { return t.id === id; })) setCity(id); }
-    road([['stage-dubai-summit', 'At the Affiliate and Influencers Summit, Dubai'], ['bootcamp-uae', 'Teaching the UAE bootcamp'], ['kira-airport-1', 'Between cities'], ['kira-desk-stripe', 'Live on the big screen'], ['kira-airport-3', 'At the gate'], ['kira-red-blazer', 'In a red blazer'], ['kira-airport-2', 'Airport lounge'], ['kira-dining-1', 'Dinner after a session']]);
+    road([['bootcamp-uae', 'Teaching the UAE bootcamp'], ['kira-lobby-red', 'Hotel lobby, between sessions'], ['kira-airport-1', 'Between cities'], ['kira-suit-white', 'Before a client dinner'], ['kira-airport-3', 'At the gate'], ['kira-red-blazer', 'In a red blazer'], ['kira-dining-1', 'Dinner after a session']]);
   }
 
   /* ---------- About ---------- */
   function about() {
     lists();
-    road([['kira-portrait-blazer', 'Portrait in a navy blazer'], ['kira-lounge-pink-tall', 'In a pink suit'], ['kira-sky', 'Under an open sky'], ['kira-desk-pink', 'At the desk'], ['kira-car-1', 'Lime trousers, black tee'], ['kira-white-suit', 'In a white suit'], ['kira-street', 'By the car'], ['kira-desk-red', 'Red dress, standing desk'], ['kira-airport-4', 'Departure gate']]);
+    road([['kira-studio-white', 'Studio portrait in a white shirt'], ['kira-portrait-blazer', 'Portrait in a navy blazer'], ['kira-lounge-pink-tall', 'In a pink suit'], ['kira-sky', 'Under an open sky'], ['kira-car-1', 'Lime trousers, black tee'], ['kira-lobby-red', 'In a red blazer'], ['kira-street', 'By the car'], ['kira-red-blazer', 'Shopping atrium']]);
     var f = $('[data-found-form]');
     f.addEventListener('submit', function (e) {
       e.preventDefault(); var msg = $('[data-found-msg]');

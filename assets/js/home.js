@@ -78,7 +78,7 @@
   // videos
   (function vids() {
     var el = $('[data-vids]'); if (!el) return;
-    el.innerHTML = KF.videos.map(function (v) {
+    el.innerHTML = KF.videos.slice(0, 4).map(function (v) {
       return '<li data-reveal><a href="https://www.youtube.com/@Kiraforexgh/videos" target="_blank" rel="noopener"><span class="vt">' + v.title + '</span><span class="vm">' + v.when + '</span><span class="vl">' + v.len + '</span></a></li>';
     }).join('');
   })();
@@ -93,8 +93,8 @@
 
   // on the road
   (function road() {
-    var frames = ['kira-airport-1', 'kira-desk-pink', 'kira-car-1', 'stage-dubai-summit', 'kira-lounge-pink-tall', 'kira-airport-3', 'kira-dining-1', 'kira-red-blazer', 'kira-desk-stripe', 'kira-car-2', 'kira-white-suit', 'bootcamp-uae', 'kira-airport-2', 'kira-sky', 'kira-desk-red', 'kira-dining-2', 'kira-street', 'kira-airport-4'];
-    var alts = { 'kira-airport-1': 'Working on a laptop in an airport lounge', 'kira-desk-pink': 'At her trading desk in pink', 'kira-car-1': 'Outside her car in lime trousers', 'stage-dubai-summit': 'At the Affiliate and Influencers Summit stage in Dubai', 'kira-lounge-pink-tall': 'In a pink suit in a lounge', 'kira-airport-3': 'Waiting at the gate with a laptop', 'kira-dining-1': 'Dinner with a chart open on the phone', 'kira-red-blazer': 'In a red blazer in a shopping atrium', 'kira-desk-stripe': 'Reading the big screen in a striped dress', 'kira-car-2': 'In the driver’s seat', 'kira-white-suit': 'In a white suit at home', 'bootcamp-uae': 'Teaching the UAE bootcamp', 'kira-airport-2': 'Airport lounge, between cities', 'kira-sky': 'Under an open sky in sunglasses', 'kira-desk-red': 'At the standing desk in a red dress', 'kira-dining-2': 'Lunch and a gold setup', 'kira-street': 'Standing by the car', 'kira-airport-4': 'Departure gate, laptop open' };
+    var frames = ['kira-studio-white', 'kira-car-1', 'kira-lobby-red', 'kira-lounge-pink-tall', 'kira-suit-white', 'bootcamp-uae', 'kira-sky', 'kira-red-blazer', 'kira-portrait-blazer', 'kira-street', 'kira-airport-3'];
+    var alts = { 'kira-studio-white': 'Studio portrait in a white shirt', 'kira-lobby-red': 'In a red blazer in a hotel lobby', 'kira-suit-white': 'In a cream trouser suit at home', 'kira-restaurant': 'At lunch, a chart on the phone', 'kira-portrait-blazer': 'Portrait in a navy blazer', 'kira-airport-1': 'Working on a laptop in an airport lounge', 'kira-desk-pink': 'At her trading desk in pink', 'kira-car-1': 'Outside her car in lime trousers', 'stage-dubai-summit': 'At the Affiliate and Influencers Summit stage in Dubai', 'kira-lounge-pink-tall': 'In a pink suit in a lounge', 'kira-airport-3': 'Waiting at the gate with a laptop', 'kira-dining-1': 'Dinner with a chart open on the phone', 'kira-red-blazer': 'In a red blazer in a shopping atrium', 'kira-desk-stripe': 'Reading the big screen in a striped dress', 'kira-car-2': 'In the driver’s seat', 'kira-white-suit': 'In a white suit at home', 'bootcamp-uae': 'Teaching the UAE bootcamp', 'kira-airport-2': 'Airport lounge, between cities', 'kira-sky': 'Under an open sky in sunglasses', 'kira-desk-red': 'At the standing desk in a red dress', 'kira-dining-2': 'Lunch and a gold setup', 'kira-street': 'Standing by the car', 'kira-airport-4': 'Departure gate, laptop open' };
     var el = $('[data-road]'); if (!el) return;
     el.innerHTML = frames.map(function (f) { return '<figure><img src="' + UI.img(f, 'thumb') + '" alt="' + (alts[f] || 'Kira on the road') + '" loading="lazy" draggable="false"></figure>'; }).join('');
     $('[data-road-count]').textContent = frames.length + ' frames, 2024 to 2026';
@@ -120,6 +120,28 @@
   (function faq() {
     var el = $('[data-faq]'); if (!el) return;
     el.innerHTML = KF.faq.map(function (f, i) { return '<details class="qa"' + (i === 0 ? ' open' : '') + ' data-reveal><summary>' + f[0] + '<span class="chev" aria-hidden="true"></span></summary><div class="ans"><p>' + f[1] + '</p></div></details>'; }).join('');
+  })();
+
+  // reach: one number at a time, tap a bar to jump, swipe on phones
+  (function reach() {
+    var host = $('[data-reach]'); if (!host) return;
+    var slides = $$('.reach__slide', host), dots = $('[data-reach-dots]'), i = 0, timer, DUR = 3200, hold = false;
+    host.style.setProperty('--dur', DUR + 'ms');
+    dots.innerHTML = slides.map(function (s, k) { return '<button type="button" role="tab" aria-label="Slide ' + (k + 1) + '" aria-selected="' + (k === 0) + '"></button>'; }).join('');
+    var bars = $$('button', dots);
+    function go(k) {
+      i = (k + slides.length) % slides.length;
+      slides.forEach(function (s, n) { s.classList.toggle('is-on', n === i); s.setAttribute('aria-hidden', String(n !== i)); });
+      bars.forEach(function (b, n) { b.setAttribute('aria-selected', 'false'); void b.offsetWidth; if (n === i) b.setAttribute('aria-selected', 'true'); });
+    }
+    function play() { clearInterval(timer); if (UI.reduced) return; timer = setInterval(function () { if (!hold) go(i + 1); }, DUR); }
+    bars.forEach(function (b, n) { b.addEventListener('click', function () { go(n); play(); }); });
+    host.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hold = true; });
+    host.addEventListener('pointerleave', function () { hold = false; });
+    var sx = null;
+    host.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
+    host.addEventListener('touchend', function (e) { if (sx == null) return; var dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) { go(i + (dx < 0 ? 1 : -1)); play(); } sx = null; });
+    go(0); play();
   })();
 
   // proof: one city lit at a time
