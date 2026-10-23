@@ -231,10 +231,19 @@
     $('[data-at-when]').textContent = live.toLocaleString('en-GB', { weekday: 'long', hour: '2-digit', minute: '2-digit' }) + ' your time. Gold and the New York open, live.';
     tick(); setInterval(tick, 1000);
     // setups: Kira's own posts from HQ first, then the worked examples
-    var posted = db.own.setups.map(function (s) { return '<div class="feed__item"><span class="tag">' + UI.esc(s.dir + ' ' + s.pair) + '</span><span>Entry ' + UI.esc(s.entry) + ' &middot; Stop ' + UI.esc(s.stop) + ' &middot; TP ' + UI.esc(s.tp) + '</span><span class="res">New</span></div>'; }).join('');
-    $('[data-at-setups]').innerHTML = posted + Object.keys(KF.setups).slice(0, 3).map(function (k) {
-      var s = KF.setups[k]; return '<div class="feed__item"><span class="tag">' + s.dir + ' ' + s.pair + '</span><span>Entry ' + fmt(s.entry, s.dp) + ' &middot; Stop ' + fmt(s.stop, s.dp) + ' &middot; TP1 ' + fmt(s.tps[0], s.dp) + '</span><span class="res">Open</span></div>';
-    }).join('');
+    function setups(fresh) {
+      var own = S.db().own.setups;
+      var posted = own.map(function (s, i) { return '<div class="feed__item' + (fresh && i === 0 ? ' is-new' : '') + '"><span class="tag">' + UI.esc(s.dir + ' ' + s.pair) + '</span><span>Entry ' + UI.esc(s.entry) + ' &middot; Stop ' + UI.esc(s.stop) + ' &middot; TP ' + UI.esc(s.tp) + '</span><span class="res">New</span></div>'; }).join('');
+      $('[data-at-setups]').innerHTML = posted + Object.keys(KF.setups).slice(0, Math.max(1, 3 - own.length)).map(function (k) {
+        var s = KF.setups[k]; return '<div class="feed__item"><span class="tag">' + s.dir + ' ' + s.pair + '</span><span>Entry ' + fmt(s.entry, s.dp) + ' &middot; Stop ' + fmt(s.stop, s.dp) + ' &middot; TP1 ' + fmt(s.tps[0], s.dp) + '</span><span class="res">Open</span></div>';
+      }).join('');
+      var first = $('[data-at-setups] .is-new');
+      if (first && G && !UI.reduced) G.fromTo(first, { opacity: 0, y: -14, backgroundColor: 'rgba(232,185,176,0.55)' }, { opacity: 1, y: 0, backgroundColor: 'rgba(232,185,176,0)', duration: 1.6, ease: 'expo.out' });
+    }
+    setups(false);
+    // a setup Kira posts in HQ arrives here while the page is open
+    var seen = db.own.setups.length;
+    S.onChange = function () { var n = S.db().own.setups.length; if (n !== seen) { seen = n; setups(true); UI.toast('New setup from Kira'); } };
     // course progress
     var mods = KF.courses[0].modules, done = UI.store.get('kf.mods', [true, true, true, false, false, false]);
     function course() {

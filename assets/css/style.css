@@ -900,3 +900,38 @@ html.pose .desk-btn { display: none; }
 .offer__name, .spot__word, .stat__n, .slip__title, .slip__total strong, .plan__name, .plan__price, .camp__city, .weeks__w, .up__name, .sess__city, .cert__name, .co-name, .at-count, .ticker__px, .voices__lead, .found__copy h2, .price__h, .rec__list h3, .course__main h3, .fit h3 { font-weight: 600; }
 .price__fig { font-weight: 700; }
 .story__para, .proof__sentence { font-weight: 400; }
+
+/* =========================================================================
+   PHONE FIXES (23 Oct): nothing is cut by the screen edge, nothing overlaps
+   ========================================================================= */
+h1, h2, h3, h4 { overflow-wrap: break-word; }
+.mods input, .agree input, .choice input { flex: none; }
+@media (max-width: 640px) {
+  /* the whole word KIRA fits the screen, with Kira standing in the I */
+  .monument { --F: calc((100vw - 2 * var(--m)) / 2.7); margin: 0 auto; }
+  .i-slot__kira { width: .5em; left: -.095em; }
+  .hero__stage { padding-top: 15svh; }
+  .hero__gl { opacity: .5; }
+  /* the footer name sits whole on the page */
+  .foot__name { height: 31vw; }
+  .foot__name span { font-size: 36vw; }
+  .cta__line { right: calc(var(--m) + 48px); }
+  /* offers: the picture keeps its one word, the sentence is in the list below */
+  .spot__line { display: none; }
+  .spot__chip { left: 10px; right: auto; bottom: 10px; padding: 10px 14px; }
+  /* setups in the student area: the pair on top, the levels under it */
+  .feed__item, .at-setups .feed__item { grid-template-columns: minmax(0, 1fr) auto; row-gap: 6px; padding: 16px 18px; }
+  .feed__item > :nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+  .feed__item > .res { grid-column: 2; grid-row: 1; }
+  .at-head { flex-direction: column; align-items: stretch; }
+  .at-chip { width: 100%; }
+}
+@media (max-width: 640px) {
+  .hero__stage { padding-bottom: 3svh; }
+  .at-live .btn, .found .btn { white-space: normal; text-align: center; }
+}
+@media (max-width: 380px) {
+  .console { padding: 20px 14px; }
+  .field input { min-width: 0; width: 100%; }
+  .btn { padding-left: 18px; padding-right: 18px; }
+}
